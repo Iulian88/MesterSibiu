@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Meșter la Tine Acasă · Sibiu
 
-## Getting Started
+Landing page de prezentare pentru servicii handyman în Sibiu și împrejurimi.
 
-First, run the development server:
+**Brand:** Meșter la Tine Acasă  
+**Contact:** Iulian · WhatsApp / telefon  
+**Stack:** Next.js (App Router) · TypeScript · Tailwind CSS · Lucide · SVG
+
+## Status
+
+Phase 1–2 complete: design system + project scaffold.  
+Landing page sections, SEO full, tracking și deploy urmează în fazele următoare.
+
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) — currently shows the design system preview.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+|---|---|
+| `npm run dev` | Development server |
+| `npm run build` | Production build |
+| `npm run start` | Serve production build |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript (`tsc --noEmit`) |
 
-## Learn More
+## Environment
 
-To learn more about Next.js, take a look at the following resources:
+Copy `.env.example` to `.env.local` and fill values when needed:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `NEXT_PUBLIC_SITE_URL` — canonical / OG base URL
+- `NEXT_PUBLIC_META_PIXEL_ID` — Meta Pixel (optional; disabled if empty)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Never commit `.env.local` or secrets.
 
-## Deploy on Vercel
+## Project structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+  app/                 # App Router (layout, page, globals)
+  components/
+    layout/            # Header, MobileNav, StickyContactBar
+    sections/          # Hero, Services, HowWeWork, ServiceArea, Contact
+    illustrations/     # Flat vector SVG components
+    ui/                # Logo, CTA buttons
+  lib/                 # contact, whatsapp, phone, meta-pixel helpers
+  styles/              # Design tokens (CSS variables)
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Design reference
+
+Approved visual reference: `docs-reference.jpg` (local, not for production UI).
+
+## Contact helpers
+
+All WhatsApp buttons must use `getWhatsAppUrl()` from `src/lib/whatsapp.ts`.  
+All phone buttons must use `getPhoneUrl()` from `src/lib/phone.ts`.
+
+## Deploy notes
+
+GitHub remote and Vercel deployment are intentionally not configured yet.

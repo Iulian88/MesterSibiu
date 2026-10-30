@@ -1,26 +1,122 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "../styles/tokens.css" layer(base);
+/* layer(components) keeps custom motion rules in the Turbopack/Tailwind CSS pipeline */
+@import "../styles/motion.css" layer(components);
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--color-cream);
+  --color-cream-soft: var(--color-cream-soft);
+  --color-forest: var(--color-forest);
+  --color-forest-dark: var(--color-forest-dark);
+  --color-forest-soft: var(--color-forest-soft);
+  --color-whatsapp: var(--color-whatsapp);
+  --color-whatsapp-hover: var(--color-whatsapp-hover);
+  --color-whatsapp-active: var(--color-whatsapp-active);
+  --color-ink: var(--color-ink);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-ink-subtle: var(--color-ink-subtle);
+  --color-border: var(--color-border);
+  --color-border-soft: var(--color-border-soft);
+  --color-phone: #087f83;
+  --color-phone-hover: #066e71;
+  --color-phone-active: #055c5f;
+  --color-phone-btn: var(--color-phone-btn);
+  --color-phone-btn-hover: var(--color-phone-btn-hover);
+  --color-map: var(--color-map);
+  --color-wood: var(--color-wood);
+  --color-wood-dark: var(--color-wood-dark);
+  --color-metal: var(--color-metal);
+  --color-water: var(--color-water);
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text);
+  --color-brand: var(--color-brand);
+  --color-cta: var(--color-cta);
+  --color-surface: var(--color-surface);
+  --font-sans: var(--font-sans);
+  --font-slogan: var(--font-slogan);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --shadow-card: var(--shadow-card);
+  --shadow-cta: var(--shadow-cta);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    text-rendering: optimizeLegibility;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-forest);
+    outline-offset: 3px;
+  }
+
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font: inherit;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .container-page {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--container-pad-x);
+  }
+
+  .section-y {
+    padding-block: var(--section-y);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .pb-sticky-safe {
+    padding-bottom: calc(var(--sticky-bar-height) + var(--safe-bottom) + 1rem);
+  }
 }
