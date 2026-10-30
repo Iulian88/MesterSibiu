@@ -67,6 +67,9 @@ export function buildMetadata(): Metadata {
         follow: true,
       },
     },
+    verification: {
+      google: "uIv05rzYpRwwufIN6PDVbpGfN69vahU6Ce2pGz0Hogg",
+    },
     category: "home services",
   };
 }
