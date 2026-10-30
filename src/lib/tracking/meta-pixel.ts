@@ -13,6 +13,9 @@ type FbqStub = FbqCommand & {
   push: FbqStub;
   loaded: boolean;
   version: string;
+  instance?: {
+    pixelsByID?: Record<string, unknown>;
+  };
 };
 
 declare global {
@@ -36,10 +39,20 @@ export function isMetaPixelReady(): boolean {
 }
 
 export function markMetaPixelInitialized(pixelId: string): void {
-  if (typeof window === "undefined" || !window.fbq) return;
+  if (typeof window === "undefined" || typeof window.fbq !== "function") {
+    return;
+  }
   if (window.__mesterPixelInitialized) return;
 
-  window.fbq("init", pixelId);
+  const existingIds = window.fbq.instance?.pixelsByID
+    ? Object.keys(window.fbq.instance.pixelsByID)
+    : [];
+
+  // Bootstrap snippet may already have queued/applied init — avoid a second one.
+  if (!existingIds.includes(pixelId)) {
+    window.fbq("init", pixelId);
+  }
+
   window.__mesterPixelInitialized = true;
   window.dispatchEvent(new Event(PIXEL_READY_EVENT));
   flushPendingMetaPixelEvents();
